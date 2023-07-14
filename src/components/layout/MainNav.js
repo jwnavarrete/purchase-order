@@ -1,42 +1,28 @@
 import React from 'react';
-import clsx from 'clsx';
+import Link from 'next/link';
+import Image from 'next/image'
 import { styled, useTheme } from '@mui/material/styles';
+import { useRouter } from 'next/router'
 import Box from '@mui/material/Box';
 import MuiAppBar from '@mui/material/AppBar';
-import ListItemButton from '@mui/material/ListItemButton';
-
-// import { useTheme } from '@mui/material/styles';
-
-// import { ThemeProvider } from '@mui/material/styles';
-// import { makeStyles, useTheme } from '@mui/styles';
-
-// import { makeStyles, useTheme, createTheme } from '@mui/styles';
-// import {makeStyles, useTheme, createTheme } from '@mui/material/styles';
-
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
-import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import { FaBeer } from 'react-icons/fa';
-
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { MdHome, MdAddBusiness, MdOutlineChecklistRtl } from "react-icons/md";
 import MenuItem from '@mui/material/MenuItem';
-import Link from 'next/link';
-import { useRouter } from 'next/router'
-
+import { MdHome, MdAddBusiness, MdOutlineChecklistRtl } from "react-icons/md";
+import { MdMenu, MdKeyboardDoubleArrowLeft, MdKeyboardDoubleArrowRight } from "react-icons/md";
+import Logo from '@/static/images/dires2-1.png'
 import Container from '@mui/material/Container';
 const drawerWidth = 240;
 
 export default function PersistentDrawerLeft(props) {
-  // const classes = useStyles();
-  const classes = null;
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const router = useRouter();
@@ -72,18 +58,6 @@ export default function PersistentDrawerLeft(props) {
       path: '/purchase/list-order',
       icon: MdOutlineChecklistRtl
     },
-    // {
-    //   id: 2,
-    //   label: 'Login',
-    //   path: '/login',
-    //   icon: LoginIcon
-    // },
-    // {
-    //   id: 3,
-    //   label: 'Register',
-    //   path: '/register',
-    //   icon: RegisterIcon
-    // }
   ]
 
   const drawerWidth = 240;
@@ -128,7 +102,6 @@ export default function PersistentDrawerLeft(props) {
     display: 'flex',
     alignItems: 'center',
     padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
     ...theme.mixins.toolbar,
     justifyContent: 'flex-end',
   }));
@@ -145,10 +118,10 @@ export default function PersistentDrawerLeft(props) {
             edge="start"
             sx={{ mr: 2, ...(open && { display: 'none' }) }}
           >
-            <FaBeer />
+            <MdMenu />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Persistent drawer
+            Pedidos de compra
           </Typography>
         </Toolbar>
       </AppBar>
@@ -166,8 +139,14 @@ export default function PersistentDrawerLeft(props) {
         open={open}
       >
         <DrawerHeader>
+          <Image
+            src={Logo}
+            width={180}
+            height={50}
+            alt="Logo de la empresa"
+          />
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <FaBeer /> : <FaBeer />}
+            {theme.direction === 'ltr' ? <MdKeyboardDoubleArrowLeft /> : <MdKeyboardDoubleArrowRight />}
           </IconButton>
         </DrawerHeader>
         <List>
@@ -175,7 +154,7 @@ export default function PersistentDrawerLeft(props) {
             <Link href={item.path} style={{ textDecoration: 'none', color: 'black' }} key={index}>
               <MenuItem selected={activeRoute(item.path, router.pathname)}>
                 <ListItem button key={index}  >
-                  <ListItemIcon> <item.icon /> </ListItemIcon>
+                  <ListItemIcon> <item.icon size={25}/> </ListItemIcon>
                   <ListItemText primary={item.label} />
                 </ListItem>
               </MenuItem>
@@ -183,22 +162,9 @@ export default function PersistentDrawerLeft(props) {
           ))}
         </List>
         <Divider />
-        {/* <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <FaBeer /> : <FaBeer />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List> */}
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
-
         <Container maxWidth="xl">
           {props.mainPage}
         </Container>

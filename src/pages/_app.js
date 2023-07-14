@@ -20,8 +20,8 @@ export default function MyApp(props) {
   return (
     <React.Fragment>
       <Head>
-        <title>Next.js Material Layout</title>
-        <link rel="shortcut icon" href="/static/favicon.ico" />
+        <title>Pedidos de compra</title>
+        <link rel="shortcut icon" href="/src/static/favicon.ico" />
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
       <ThemeProvider theme={theme}>
